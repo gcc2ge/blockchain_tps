@@ -3,7 +3,7 @@
 下载项目：
 
 ```
-git clone 
+git clone https://github.com/gcc2ge/blockchain_tps.git
 ```
 
 npm安装依赖
