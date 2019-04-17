@@ -58,13 +58,17 @@ async function measurement(blockNumber, pauseBetweenQueries = 15000) {
 
 }
 
-const web3 = new Web3('http://10.211.55.8:8545');
+var web3;
 
-async function start() {
+async function start(eth_url='http://10.211.55.8:8545') {
+    web3 = new Web3(eth_url);
     let blockNumber_start = await web3.eth.getBlockNumber();
     console.info("\nBlock ", blockNumber_start, " - waiting for something to happen");
     measurement(blockNumber_start);
 }
 
-
-start();
+if (process.argv.length >2){
+    start(process.argv[2]);
+}else{
+    start();
+}
