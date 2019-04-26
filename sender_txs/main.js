@@ -9,10 +9,10 @@ var Web3 = require("web3");
 var Coin = require('./coin');
 
 const NUM_ACCOUNT = 100;
-var mnemonic = 'make animal theme rose fresh hybrid beach inner deposit nut alert just';
 var wallets = new Array(NUM_ACCOUNT);
+var mnemonic = 'make animal theme rose fresh hybrid beach inner deposit nut alert just';
 
-// 初始化账号、余额
+// 初始化余额
 async function initBalance(url) {
     const web3 = new Web3(url);
     let main_wallet = Wallet.fromV3(`{"address":"eb680f30715f347d4eb5cd03ac5eced297ac5046","crypto":{"cipher":"aes-128-ctr","ciphertext":"0a5993469b3546c8581abbb597ed15b2e14d14c8a55713b9f7fd276d5ef35c5b","cipherparams":{"iv":"9164453efdad36e06c2a36be5c522c24"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"7618b02cbcac1127b57b1bc9c8b468cccf105e5724bdcd7ca50ec99434f29671"},"mac":"7b3c086d138b181e1baa6aab7c4f93e1fc220862181d835e9efb1a41d57c8e08"},"id":"3a7959b8-1c2f-42fe-b375-6a0a93d1dffc","version":3}`, "123456");
@@ -29,7 +29,7 @@ async function initBalance(url) {
     }
 }
 
-// 开始
+// 开始发送交易
 
 function startSendTx(urls) {
     let len = urls.length;
@@ -62,6 +62,7 @@ async function main() {
     await createAccounts();
     initBalance('http://10.211.55.8:8545');
     setTimeout(() => {
+        // 配置多个节点
         startSendTx(['http://10.211.55.8:8545', 'http://10.211.55.8:8546', 'http://10.211.55.8:8547', 'http://10.211.55.8:8548']);
     }, 1 * 60 * 1000);
 }
