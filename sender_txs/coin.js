@@ -8,7 +8,7 @@ class Coin {
         this.wallet = _wallet;
     }
 
-    async transfer(_from, _to, _amount, _nonce) {
+    async transfer(_from, _to, _amount, _nonce,errcb) {
 
         var gasPrice = "18000000000";
 
@@ -38,7 +38,7 @@ class Coin {
             if (!err) {
                 console.log(hash);
             } else {
-                console.log(err)
+                errcb(err);
             }
         });
     }
