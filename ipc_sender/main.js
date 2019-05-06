@@ -10,7 +10,7 @@ var Coin = require('./coin');
 
 var net = require('net')
 
-const NUM_ACCOUNT = 100;
+const NUM_ACCOUNT = 300;
 var wallets = new Array(NUM_ACCOUNT);
 var mnemonic = 'make animal theme rose fresh hybrid beach inner deposit nut alert just';
 
