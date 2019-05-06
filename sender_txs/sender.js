@@ -9,7 +9,7 @@ var Web3 = require("web3");
 
 var Wallet = require('../lib/wallet');
 
-const queue_size = 600;
+const queue_size = 800;
 
 //
 
@@ -45,9 +45,9 @@ async function start(web3, pause = 50, wallet_Private, toArr) {
 
             // 删除成功的交易
             hashs.forEach((item, key, mapObj) => {
-                web3.eth.getTransactionReceipt(hash[i]).then(hash => {
+                web3.eth.getTransactionReceipt(key).then(hash => {
                     if (hash) {
-                        hashs.delete(hash);
+                        hashs.delete(key);
                     }
                 })
             });
