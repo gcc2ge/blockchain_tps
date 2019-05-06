@@ -71,7 +71,7 @@ async function createAccounts() {
 
 async function main() {
     await createAccounts();
-    startSendTx('/home/geth.ipc');
+    startSendTx('/home/ppio/geth_deploy_script/miner1/db/geth.ipc');
 }
 
 main();
