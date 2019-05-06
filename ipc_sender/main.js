@@ -8,9 +8,9 @@ var Wallet = require('../lib/wallet');
 var Web3 = require("web3");
 var Coin = require('./coin');
 
-var net =require('net')
+var net = require('net')
 
-const NUM_ACCOUNT = 300;
+const NUM_ACCOUNT = 100;
 var wallets = new Array(NUM_ACCOUNT);
 var mnemonic = 'make animal theme rose fresh hybrid beach inner deposit nut alert just';
 
@@ -31,20 +31,29 @@ async function initBalance(url) {
     }
 }
 
+var split_wallets;
+
+function splitAccount(from, to) {
+    split_wallets = new Array(to - from);
+    let count = 0;
+    for (let i = from; i < to; i++) {
+        split_wallets[count] = wallets[i];
+        count = count + 1;
+    }
+}
+
 // 开始发送交易
 
-function startSendTx(urls) {
-    let len = urls.length;
-    let count = 0;
-    let web3s = new Array(len);
-    for (let i = 0; i < len; i++) {
-        web3s[i] = new Web3(urls[i],net,{});
-    }
+function startSendTx(url) {
+    splitAccount(0,100);
 
-    for (let i = 0; i < wallets.length; i++) {
-        let web3 = web3s[count % len];
+    let web3 = new Web3(url, net);
+
+    let count = 0;
+
+    for (let i = 0; i < split_wallets.length; i++) {
         count = count + 1;
-        sender(web3, 2000, wallets[i], wallets);
+        sender(web3, 2000, split_wallets[i], split_wallets);
     }
 }
 
@@ -62,11 +71,7 @@ async function createAccounts() {
 
 async function main() {
     await createAccounts();
-    // initBalance('http://192.168.50.204:8545');
-    // setTimeout(() => {
-        // 配置多个节点
-        startSendTx(['/home/geth.ipc']);
-    // }, 1 * 60 * 1000);
+    startSendTx('/home/geth.ipc');
 }
 
 main();
