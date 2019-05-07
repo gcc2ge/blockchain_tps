@@ -60,7 +60,7 @@ async function measurement(blockNumber, pauseBetweenQueries = 15000) {
 
 var web3;
 
-async function start(eth_url='http://10.211.55.8:8545') {
+async function start(eth_url='http://192.168.50.205:8546') {
     web3 = new Web3(eth_url);
     let blockNumber_start = await web3.eth.getBlockNumber();
     console.info("\nBlock ", blockNumber_start, " - waiting for something to happen");
