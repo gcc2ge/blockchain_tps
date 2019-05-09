@@ -10,7 +10,7 @@ var Coin = require('./coin');
 
 var net = require('net')
 
-const NUM_ACCOUNT = 300;
+const NUM_ACCOUNT = 500;
 var wallets = new Array(NUM_ACCOUNT);
 var mnemonic = 'make animal theme rose fresh hybrid beach inner deposit nut alert just';
 
@@ -45,6 +45,7 @@ function splitAccount(from, to) {
 // 开始发送交易
 
 function startSendTx(url) {
+    // 账户间隔
     splitAccount(0,100);
 
     let web3 = new Web3(url, net);
